@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.file.bigfile.mapper.FileTbMapper">
+  <resultMap id="BaseResultMap" type="com.file.bigfile.domain.FileTb">
+    <!--@mbg.generated-->
+    <!--@Table file_tb-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="f_key" jdbcType="VARCHAR" property="fKey" />
+    <result column="f_index" jdbcType="BIGINT" property="fIndex" />
+    <result column="f_total" jdbcType="INTEGER" property="fTotal" />
+    <result column="f_name" jdbcType="VARCHAR" property="fName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, f_key, f_index, f_total, f_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from file_tb
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from file_tb
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.file.bigfile.domain.FileTb" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_tb (f_key, f_index, f_total, 
+      f_name)
+    values (#{fKey,jdbcType=VARCHAR}, #{fIndex,jdbcType=BIGINT}, #{fTotal,jdbcType=INTEGER}, 
+      #{fName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.file.bigfile.domain.FileTb" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_tb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fKey != null">
+        f_key,
+      </if>
+      <if test="fIndex != null">
+        f_index,
+      </if>
+      <if test="fTotal != null">
+        f_total,
+      </if>
+      <if test="fName != null">
+        f_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fKey != null">
+        #{fKey,jdbcType=VARCHAR},
+      </if>
+      <if test="fIndex != null">
+        #{fIndex,jdbcType=BIGINT},
+      </if>
+      <if test="fTotal != null">
+        #{fTotal,jdbcType=INTEGER},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.file.bigfile.domain.FileTb">
+    <!--@mbg.generated-->
+    update file_tb
+    <set>
+      <if test="fKey != null">
+        f_key = #{fKey,jdbcType=VARCHAR},
+      </if>
+      <if test="fIndex != null">
+        f_index = #{fIndex,jdbcType=BIGINT},
+      </if>
+      <if test="fTotal != null">
+        f_total = #{fTotal,jdbcType=INTEGER},
+      </if>
+      <if test="fName != null">
+        f_name = #{fName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.file.bigfile.domain.FileTb">
+    <!--@mbg.generated-->
+    update file_tb
+    set f_key = #{fKey,jdbcType=VARCHAR},
+      f_index = #{fIndex,jdbcType=BIGINT},
+      f_total = #{fTotal,jdbcType=INTEGER},
+      f_name = #{fName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="UpdateFile">
+    update file_tb set f_index=#{fIndex,jdbcType=BIGINT} where f_key =#{fKey,jdbcType=VARCHAR}
+  </update>
+  <select id="isExist" resultType="java.lang.Integer">
+    SELECT id from file_tb f WHERE f.f_key=#{key,jdbcType=VARCHAR} limit 1
+  </select>
+  <select id="selectLatestIndex" resultType="com.file.bigfile.domain.FileTb">
+    SELECT * from file_tb f WHERE f.f_key=#{key,jdbcType=VARCHAR} limit 1
+  </select>
+</mapper>

@@ -1,0 +1,38 @@
+server:
+  port: 80
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+logging:
+  level:
+    com.file.fileupload.mapper: debug
+
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/file_tb?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    platform: mysql
+  druid:
+    initial-size: 20
+    max-active: 100
+    max-wait: 60000
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 30
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    validation-query: select 1
+file:
+  basepath: D:/BaiduNetdiskDownload/
